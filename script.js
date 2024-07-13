@@ -5,7 +5,7 @@ async function fetchPrices(tokenName, tokenAddress) {
         const data = await response.json();
         
         const value = data.data[tokenAddress]?.value;
-        return { tokenName, value: value ? parseFloat(value).toFixed(5) : 'Error' }; // Formata para 2 casas decimais
+        return { tokenName, value: value ? parseFloat(value).toFixed(10) : 'Error' }; // Formata para 2 casas decimais
     } catch (error) {
         console.error(`Error fetching prices for token ${tokenName}:`, error);
         return { tokenName, value: 'Error' };

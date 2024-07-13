@@ -104,5 +104,5 @@ function updateTotalValue() {
     totalElement.textContent = `Total Value: ${totalValue.toFixed(2)}`;
 }
 
-setInterval(readTokensAndFetchPrices, 10000);
+setInterval(readTokensAndFetchPrices, 30000);
 document.addEventListener('DOMContentLoaded', readTokensAndFetchPrices);

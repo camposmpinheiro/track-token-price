@@ -5,7 +5,7 @@ async function fetchPrices(tokenName, tokenAddress) {
         const data = await response.json();
         
         const value = data.data[tokenAddress]?.value;
-        return { tokenName, value: value ? parseFloat(value).toFixed(10) : 'Error' }; // Formata para 2 casas decimais
+        return { tokenName, value: value ? parseFloat(value).toFixed(10) : 'Error' };
     } catch (error) {
         console.error(`Error fetching prices for token ${tokenName}:`, error);
         return { tokenName, value: 'Error' };
@@ -34,52 +34,53 @@ async function readTokensAndFetchPrices() {
 
 function updateTable(prices) {
     const tbody = document.querySelector('#pricesTable tbody');
-    
-    prices.forEach(({ tokenName, value }) => {
-        const existingRow = Array.from(tbody.rows).find(row => row.cells[0].textContent === tokenName);
+    tbody.innerHTML = ''; // Limpa a tabela antes de atualizar
+
+    prices.forEach(({ tokenName, value }, index) => {
+        const row = document.createElement('tr');
         
-        if (existingRow) {
-            existingRow.cells[1].textContent = value;
-            const quantityInput = existingRow.cells[2].querySelector('input');
-            quantityInput.value = localStorage.getItem(tokenName) || '';
-            updateTotal(existingRow, value);
-        } else {
-            const row = document.createElement('tr');
-            const nameCell = document.createElement('td');
-            const valueCell = document.createElement('td');
-            const quantityCell = document.createElement('td');
-            const totalCell = document.createElement('td');
+        // Coluna do contador
+        const indexCell = document.createElement('td');
+        indexCell.textContent = index + 1; // Começa de 1
+        row.appendChild(indexCell);
 
-            nameCell.textContent = tokenName;
-            valueCell.textContent = value;
-            const quantityInput = document.createElement('input');
-            quantityInput.type = 'number';
-            quantityInput.step = '0.01';
-            quantityInput.min = '0';
-            quantityInput.value = localStorage.getItem(tokenName) || '';
-            quantityInput.addEventListener('input', () => {
-                localStorage.setItem(tokenName, quantityInput.value);
-                updateTotal(row, value);
-            });
+        const nameCell = document.createElement('td');
+        const valueCell = document.createElement('td');
+        const quantityCell = document.createElement('td');
+        const totalCell = document.createElement('td');
 
-            quantityCell.appendChild(quantityInput);
-
-            row.appendChild(nameCell);
-            row.appendChild(valueCell);
-            row.appendChild(quantityCell);
-            row.appendChild(totalCell);
-            tbody.appendChild(row);
-
+        nameCell.textContent = tokenName;
+        valueCell.textContent = value;
+        
+        const quantityInput = document.createElement('input');
+        quantityInput.type = 'number';
+        quantityInput.step = '0.01';
+        quantityInput.min = '0';
+        quantityInput.value = localStorage.getItem(tokenName) || '';
+        
+        quantityInput.addEventListener('input', () => {
+            localStorage.setItem(tokenName, quantityInput.value);
             updateTotal(row, value);
-        }
+        });
+
+        quantityCell.appendChild(quantityInput);
+        row.appendChild(indexCell);
+        row.appendChild(nameCell);
+        row.appendChild(valueCell);
+        row.appendChild(quantityCell);
+        row.appendChild(totalCell);
+        
+        tbody.appendChild(row);
+
+        updateTotal(row, value);
     });
 
     updateTotalValue();
 }
 
 function updateTotal(row, price) {
-    const quantityInput = row.cells[2].querySelector('input');
-    const totalCell = row.cells[3];
+    const quantityInput = row.cells[3].querySelector('input');
+    const totalCell = row.cells[4];
 
     const quantity = parseFloat(quantityInput.value) || 0;
     const priceValue = parseFloat(price) || 0;
@@ -93,7 +94,7 @@ function updateTotalValue() {
     let totalValue = 0;
 
     Array.from(tbody.rows).forEach(row => {
-        const totalCell = row.cells[3];
+        const totalCell = row.cells[4];
         const value = parseFloat(totalCell.textContent) || 0;
         totalValue += value;
     });
@@ -103,5 +104,4 @@ function updateTotalValue() {
 }
 
 setInterval(readTokensAndFetchPrices, 10000);
-
 document.addEventListener('DOMContentLoaded', readTokensAndFetchPrices);

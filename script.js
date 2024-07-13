@@ -100,8 +100,11 @@ function updateTotalValue() {
     });
     totalValue = totalValue * 2;
 
-    const totalElement = document.getElementById('totalValue');
-    totalElement.textContent = `Total Value: ${totalValue.toFixed(2)}`;
+    const totalElement1 = document.getElementById('totalValue1');
+    totalElement1.textContent = `Total Value: ${totalValue.toFixed(2)}`;
+
+    const totalElement2 = document.getElementById('totalValue2');
+    totalElement2.textContent = `Total Value: ${totalValue.toFixed(2)}`;
 }
 
 setInterval(readTokensAndFetchPrices, 30000);

@@ -98,6 +98,7 @@ function updateTotalValue() {
         const value = parseFloat(totalCell.textContent) || 0;
         totalValue += value;
     });
+    totalValue = totalValue * 2;
 
     const totalElement = document.getElementById('totalValue');
     totalElement.textContent = `Total Value: ${totalValue.toFixed(2)}`;

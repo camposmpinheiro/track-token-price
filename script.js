@@ -5,7 +5,7 @@ async function fetchPrices(tokenName, tokenAddress) {
         const data = await response.json();
         
         const value = data.data[tokenAddress]?.value;
-        return { tokenName, value: value ? parseFloat(value).toFixed(2) : 'Error' }; // Formata para 2 casas decimais
+        return { tokenName, value: value ? parseFloat(value).toFixed(5) : 'Error' }; // Formata para 2 casas decimais
     } catch (error) {
         console.error(`Error fetching prices for token ${tokenName}:`, error);
         return { tokenName, value: 'Error' };
@@ -84,7 +84,7 @@ function updateTotal(row, price) {
     const quantity = parseFloat(quantityInput.value) || 0;
     const priceValue = parseFloat(price) || 0;
 
-    totalCell.textContent = (quantity * priceValue).toFixed(2);
+    totalCell.textContent = (quantity * priceValue).toFixed(3);
     updateTotalValue();
 }
 
@@ -99,7 +99,7 @@ function updateTotalValue() {
     });
 
     const totalElement = document.getElementById('totalValue');
-    totalElement.textContent = `Total value: ${totalValue.toFixed(2)}`;
+    totalElement.textContent = `Total Value: ${totalValue.toFixed(2)}`;
 }
 
 // Executa a função a cada 5 segundos

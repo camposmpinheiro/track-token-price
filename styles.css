@@ -6,7 +6,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background: linear-gradient(to bottom, #4CAF50, #9C27B0);
+    background: linear-gradient(to bottom, #145a16, #b54cc8);
 }
 
 h1 {
@@ -17,6 +17,10 @@ h1 {
     width: 80%;
     max-width: 600px;
     margin-top: 20px;
+}
+
+#totalValue{
+    color:white;
 }
 
 table {

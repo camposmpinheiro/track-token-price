@@ -32,10 +32,10 @@ table, th, td {
 }
 
 th, td {
-    padding: 10px 15px; /* Aumentar padding */
+    padding: 8px 10px; /* Aumentar padding */
     text-align: center;
     color: #fff; /* Cor do texto das células */
-    font-size: 24px; /* Aumenta o tamanho da fonte */
+    font-size: 20px; /* Aumenta o tamanho da fonte */
 }
 
 th {
@@ -47,7 +47,7 @@ td input {
     box-sizing: border-box; /* Garante que o padding não afete a largura */
     background: transparent; /* Fundo transparente */
     border: none; /* Remove borda */
-    font-size: 31px; /* Tamanho da fonte */
+    font-size: 20px; /* Tamanho da fonte */
     text-align: center; /* Centraliza o texto */
     color: #fff; /* Cor do texto */
     outline: none; /* Remove o contorno ao focar */

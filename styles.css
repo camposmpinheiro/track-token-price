@@ -4,20 +4,14 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     margin: 0;
-    background: linear-gradient(to bottom, #145a16, #b54cc8);
+    background: linear-gradient(to right, #145a16, #7f358b);
 }
 
 h1 {
     color: #333;
 }
 
-.table-container {
-    width: 80%;
-    max-width: 600px;
-    margin-top: 20px;
-}
 
 #totalValue{
     color:white;

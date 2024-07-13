@@ -102,8 +102,6 @@ function updateTotalValue() {
     totalElement.textContent = `Total Value: ${totalValue.toFixed(2)}`;
 }
 
-// Executa a função a cada 5 segundos
-setInterval(readTokensAndFetchPrices, 5000);
+setInterval(readTokensAndFetchPrices, 10000);
 
-// Chamada inicial para preencher a tabela imediatamente
 document.addEventListener('DOMContentLoaded', readTokensAndFetchPrices);
